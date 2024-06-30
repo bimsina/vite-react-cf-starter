@@ -20,6 +20,9 @@ importers:
 
   apps/client:
     dependencies:
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -59,6 +62,10 @@ importers:
         version: 5.3.2(@types/node@20.11.24)
 
   apps/server:
+    dependencies:
+      '@repo/utils':
+        specifier: workspace:*
+        version: link:../../packages/utils
     devDependencies:
       '@cloudflare/vitest-pool-workers':
         specifier: ^0.4.5
@@ -75,6 +82,8 @@ importers:
       wrangler:
         specifier: ^3.60.3
         version: 3.62.0(@cloudflare/workers-types@4.20240620.0)
+
+  packages/utils: {}
 
 packages:
 

@@ -11,10 +11,25 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { sharedString } from '@repo/utils';
 import { corsifyResponse } from './cors';
 
 export default {
 	async fetch(request, env, ctx): Promise<Response> {
-		return corsifyResponse(new Response('Hello from cf worker!'), request, env);
+		return corsifyResponse(
+			new Response(
+				JSON.stringify({
+					message: 'Hello from Cloudflare Worker!',
+					shared: sharedString,
+				}),
+				{
+					headers: {
+						'Content-Type': 'application/json',
+					},
+				},
+			),
+			request,
+			env,
+		);
 	},
 } satisfies ExportedHandler<Env>;

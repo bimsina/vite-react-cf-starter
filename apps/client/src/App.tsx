@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
+import { sharedString } from "@repo/utils";
 
 function App() {
   const [count, setCount] = useState(0);
   const [message, setMessage] = useState("");
   useEffect(() => {
     fetch("http://localhost:8787/")
-      .then((res) => res.text())
+      .then((res) => res.json())
       .then((data) => {
-        setMessage(data);
+        setMessage(JSON.stringify(data));
       });
   }, []);
 
@@ -20,7 +21,10 @@ function App() {
         count is {count}
       </button>
 
-      <h3>The response from CF worker is : {message}</h3>
+      <h3>The response from CF worker is: </h3>
+      <p>{message}</p>
+
+      <p>Shared string : {sharedString}</p>
     </div>
   );
 }
